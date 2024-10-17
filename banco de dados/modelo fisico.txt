@@ -1,0 +1,69 @@
+CREATE TABLE Veterinário (
+id_veterinario int(11) PRIMARY KEY,
+nome varchar(255),
+RG varchar(255),
+CPF varchar(255),
+nascimento date,
+telefone varchar(255),
+email varchar(255),
+formação varchar(255),
+tipo varchar(255),
+especialização varchar(255)
+)
+
+
+CREATE TABLE Dono (
+id_dono int PRIMARY KEY,
+nome varchar(255),
+CPF varchar(15),
+RG varchar(15),
+email varchar(255),
+nascimento date,
+telefone varchar(255),
+bairro varchar(255),
+estado varchar(255),
+cidade varchar(255),
+rua varchar(255),
+numero int(11)
+)
+
+CREATE TABLE animal (
+id_animal int(11) PRIMARY KEY,
+nome varchar(255),
+idade int(11),
+dtnasc date,
+espécie varchar(255),
+raça varchar(255),
+sexo varchar(255),
+porte varchar(255),
+alergias varchar(255),
+castrado bit,
+id_dono int,
+FOREIGN KEY(id_dono) REFERENCES Dono (id_dono),
+);
+
+CREATE TABLE Consulta (
+id_consulta int(11) PRIMARY KEY,
+horario time,
+descricao varchar(255),
+motivo varchar(255),
+data date,
+id_animal int(11),
+id_veterinario int(11),
+FOREIGN KEY(id_animal) REFERENCES animal (id_animal),
+FOREIGN KEY(id_veterinario) REFERENCES Veterinário (id_veterinario)
+)
+
+CREATE TABLE ficha (
+id_diag int(11) PRIMARY KEY,
+exames varchar(255),
+retorno bit,
+diagnostico varchar(255),
+medicamento varchar(255),
+vacina varchar(255),
+data date,
+id_consulta int(11),
+FOREIGN KEY(id_consulta) REFERENCES Consulta (id_consulta)
+)
+
+
